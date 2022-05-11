@@ -12,7 +12,7 @@ const toDos = []
 const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO: return [{ text: action.text, id: Date.now() }, ...state]
-    case DELETE_TODO: return []
+    case DELETE_TODO: return state.filter(toDo => toDo.id !== action.id)
     default: return state
   }
 }
@@ -42,7 +42,7 @@ const dispatchAddToDo = text => {
   store.dispatch(addToDo(text))
 }
 const dispatchDeleteToDo = (e) => {
-  const id = e.target.parentNode.id
+  const id = parseInt(e.target.parentNode.id)
   store.dispatch(deleteToDo(id))
 }
 const onSubmit = e => {
