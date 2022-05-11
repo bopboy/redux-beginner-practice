@@ -23,21 +23,33 @@ const paintToDos = () => {
   ul.innerHTML = ''
   toDos.forEach(toDo => {
     const li = document.createElement('li')
+    const btn = document.createElement('button')
+    btn.innerText = 'Del'
+    btn.addEventListener('click', dispatchDeleteToDo)
     li.id = toDo.id
     li.innerText = toDo.text
+    li.append(btn)
     ul.append(li)
   })
 }
+
 store.subscribe(paintToDos)
 
-const addToDo = text => {
-  store.dispatch({ type: ADD_TODO, text })
+const addToDo = text => { return { type: ADD_TODO, text } }
+const deleteToDo = id => { return { type: DELETE_TODO, id } }
+
+const dispatchAddToDo = text => {
+  store.dispatch(addToDo(text))
+}
+const dispatchDeleteToDo = (e) => {
+  const id = e.target.parentNode.id
+  store.dispatch(deleteToDo(id))
 }
 const onSubmit = e => {
   e.preventDefault()
   const toDo = input.value
   input.value = ''
   input.focus()
-  addToDo(toDo)
+  dispatchAddToDo(toDo)
 }
 form.addEventListener('submit', onSubmit)
