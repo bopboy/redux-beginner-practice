@@ -3,8 +3,8 @@ import { createStore } from 'redux'
 const ADD = 'ADD'
 const DELETE = 'DELETE'
 
-export const addToDo = text => { return { type: ADD, text } }
-export const deleteToDo = id => { return { type: DELETE, id } }
+const addToDo = text => { return { type: ADD, text } }
+const deleteToDo = id => { return { type: DELETE, id } }
 const reducer = (state = [], action) => {
     switch (action.type) {
         case ADD: return [{ text: action.text, id: Date.now() }, ...state]
@@ -14,4 +14,7 @@ const reducer = (state = [], action) => {
 }
 const store = createStore(reducer)
 // store.subscribe()
+export const actionCreatros = {
+    addToDo, deleteToDo
+}
 export default store
