@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
 
 function Detail({ toDo }) {
-    // const id = useParams()
     return (
         <>
             <h1>{toDo?.text}</h1>
